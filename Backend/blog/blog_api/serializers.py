@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import BlogData
+from .models import BlogData,Contact
 
 class BlogSerializer(serializers.ModelSerializer):
     class Meta:
@@ -7,7 +7,7 @@ class BlogSerializer(serializers.ModelSerializer):
         fields = "__all__"
         
 class BlogCreateSerializer(serializers.ModelSerializer):
-    class Meta:
+    class Meta: 
         model = BlogData
         fields = "__all__"
         
@@ -29,4 +29,15 @@ class BlogCreateSerializer(serializers.ModelSerializer):
                 if i.isdigit():
                     raise serializers.ValidationError("Author must not contain any digit")
         
+        return data
+    
+class ContactSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Contact
+        fields = "__all__"
+        
+    def validate(self,data):
+        if data['email']:
+            if len(data['email']) < 6:
+                raise serializers.ValidationError("Email must be at least 6 characters long")
         return data

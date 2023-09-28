@@ -1,15 +1,15 @@
 import React, { useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { BiLogOut,BiLogIn } from "react-icons/bi"
-import {SiGnuprivacyguard} from "react-icons/si"
-import {IoHomeOutline} from 'react-icons/io5'
-import {GrTechnology} from 'react-icons/gr'
-import {HiOutlineLightBulb} from 'react-icons/hi'
-import './Navbar.css'
-import logo from './logo.png'
+import { BiLogOut, BiLogIn } from "react-icons/bi";
+import { SiGnuprivacyguard } from "react-icons/si";
+import { IoHomeOutline } from "react-icons/io5";
+import { GrTechnology } from "react-icons/gr";
+import { HiOutlineLightBulb } from "react-icons/hi";
+import "./Navbar.css";
+import logo from "./logo.png";
 export default function Navbar() {
   const logout = () => {
-    localStorage.clear()
+    localStorage.clear();
   };
   let location = useLocation();
   useEffect(() => {}, [location]);
@@ -18,7 +18,7 @@ export default function Navbar() {
       <nav className="navbar navbar-expand-lg bg-body-tertiary">
         <div className="container-fluid">
           <Link className="navbar-brand" to="/">
-            <img src={logo} width="150px" height="150px" alt="logo"/>
+            <img src={logo} width="150px" height="150px" alt="logo" />
           </Link>
           <button
             className="navbar-toggler"
@@ -40,19 +40,21 @@ export default function Navbar() {
                   }`}
                   aria-current="page"
                   to="/"
-                ><IoHomeOutline className="icon mr-2"/>
+                >
+                  <IoHomeOutline className="icon mr-2" />
                   Home
                 </Link>
               </li>
               <li className="nav-item">
                 <Link
                   className={`nav-link ${
-                    location.pathname === "/startups" ? "active" : ""
+                    location.pathname === "/contact" ? "active" : ""
                   }`}
                   aria-current="page"
-                  to="/startups"
-                ><HiOutlineLightBulb className="icon"/>
-                  Startups
+                  to="/contact"
+                >
+                  <HiOutlineLightBulb className="icon" />
+                  Contact
                 </Link>
               </li>
               <li className="nav-item">
@@ -62,25 +64,39 @@ export default function Navbar() {
                   }`}
                   aria-current="page"
                   to="/techblogs"
-                ><GrTechnology className="icon"/>
+                >
+                  <GrTechnology className="icon" />
                   Tech Blogs
                 </Link>
               </li>
             </ul>
+            {localStorage.getItem("token") ? (
+              <>
+                <Link
+                  className="btn btn-primary mx-2"
+                  to="/addpost"
+                  role="button"
+                >
+                  Add Post
+                </Link>
+              </>
+            ) : null}
             {!localStorage.getItem("token") ? (
               <>
                 <Link
                   className="btn btn-primary mx-2"
                   to="/login"
                   role="button"
-                ><BiLogIn className='icon' />
+                >
+                  <BiLogIn className="icon" />
                   Login
                 </Link>
                 <Link
                   className="btn btn-primary mx-2"
                   to="/signup"
                   role="button"
-                ><SiGnuprivacyguard className='icon' />
+                >
+                  <SiGnuprivacyguard className="icon" />
                   Signup
                 </Link>
               </>
@@ -90,10 +106,12 @@ export default function Navbar() {
                 to="/login"
                 role="button"
                 onClick={logout}
-              ><BiLogOut className='icon' />
+              >
+                <BiLogOut className="icon" />
                 Logout
               </Link>
             )}
+            
           </div>
         </div>
       </nav>

@@ -33,10 +33,11 @@ export default function Login(props) {
       .then((result) => {
         // You can access the Google user's information in result.user
         const user = result.user;
-        console.log("Google Sign-In successful", user);
-        console.log(user.accessToken);
+        console.log("Google Sign-In successful",user.email);
+        // console.log(user.accessToken);
         if (user.accessToken) {
           localStorage.setItem("token", user.accessToken);
+          localStorage.setItem("email", user.email);
           props.showAlert("Logged in successfully", "success");
           navigate("/");
         } else {

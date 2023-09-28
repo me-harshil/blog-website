@@ -64,6 +64,7 @@ export default function AddPost(props) {
       author: "",
     });
     setValue("");
+    setSelectedImage(null);
     props.showAlert("Post Content Reset Successfully", "success");
   };
 
@@ -114,7 +115,7 @@ export default function AddPost(props) {
         <label htmlFor="image" className="form-label me-2">
             Upload Image 
           </label>
-        <input type="file" accept="image/*" onChange={handleImageChange} id="image" name="image"/>
+        <input type="file" accept="image/*" onChange={handleImageChange} id="image" name="image" required/>
         </div>
         <div className="mb-3">
           <label htmlFor="postContent" className="form-label">
@@ -176,7 +177,8 @@ export default function AddPost(props) {
               post.title === "" ||
               post.tag === "" ||
               post.description === "" ||
-              value === ""
+              value === "" ||
+              selectedImage === null
             }
           >
             Create Post

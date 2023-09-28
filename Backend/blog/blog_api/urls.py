@@ -10,4 +10,5 @@ urlpatterns = [
     path("api/blogs/deleteblog/<id>/",views.Blog.as_view()),
     path("api/blogs/updateblog/<id>/",views.Blog.as_view()),
     path("api/blogs/<id>/",views.BlogById.as_view()),
+    path("api/blogs/contact",views.Contact.as_view()),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

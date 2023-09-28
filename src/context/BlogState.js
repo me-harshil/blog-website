@@ -16,6 +16,8 @@ const BlogState = (props) => {
 
   const addBlog = async (title, description, tag, author,image) => {
     try {
+      // const email = localStorage.getItem("email");
+      const email = "hello@hello.com"
       const url = "http://127.0.0.1:8000/api/blogs/addblog";
       const formData = new FormData();
       formData.append("title", title);
@@ -25,6 +27,9 @@ const BlogState = (props) => {
       formData.append("image", image);
       const response = await fetch(url, {
         method: "POST",
+        headers: {
+          "user-email": email,
+        },
         body: formData,
       });
       // const response = await fetch(url, {
@@ -35,6 +40,7 @@ const BlogState = (props) => {
       //   body: JSON.stringify({ title, description, tag, author }),
       // });
       const data = await response.json();
+      // console.log(data);
       // console.log(data.non_field_errors);
       if (!data.non_field_errors) {
         props.showAlert("Post Added Successfully", "success");
@@ -45,6 +51,7 @@ const BlogState = (props) => {
       }
     } catch (error) {
       props.showAlert("Post Not Added", "danger");
+      console.log(error);
       return false;
     }
   };
