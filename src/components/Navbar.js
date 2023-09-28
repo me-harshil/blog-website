@@ -4,7 +4,8 @@ import { BiLogOut, BiLogIn } from "react-icons/bi";
 import { SiGnuprivacyguard } from "react-icons/si";
 import { IoHomeOutline } from "react-icons/io5";
 import { GrTechnology } from "react-icons/gr";
-import { HiOutlineLightBulb } from "react-icons/hi";
+// import { HiOutlineLightBulb } from "react-icons/hi";
+import { MdContactMail } from "react-icons/md";
 import "./Navbar.css";
 import logo from "./logo.png";
 export default function Navbar() {
@@ -18,7 +19,7 @@ export default function Navbar() {
       <nav className="navbar navbar-expand-lg bg-body-tertiary">
         <div className="container-fluid">
           <Link className="navbar-brand" to="/">
-            <img src={logo} width="150px" height="150px" alt="logo" />
+            <img src={logo} width="300px" height="60px" alt="logo" />
           </Link>
           <button
             className="navbar-toggler"
@@ -33,7 +34,7 @@ export default function Navbar() {
           </button>
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-              <li className="nav-item">
+              <li className="nav-item fw-bold">
                 <Link
                   className={`nav-link ${
                     location.pathname === "/" ? "active" : ""
@@ -45,7 +46,7 @@ export default function Navbar() {
                   Home
                 </Link>
               </li>
-              <li className="nav-item">
+              <li className="nav-item fw-bold">
                 <Link
                   className={`nav-link ${
                     location.pathname === "/contact" ? "active" : ""
@@ -53,11 +54,11 @@ export default function Navbar() {
                   aria-current="page"
                   to="/contact"
                 >
-                  <HiOutlineLightBulb className="icon" />
+                  <MdContactMail className="icon" />
                   Contact
                 </Link>
               </li>
-              <li className="nav-item">
+              <li className="nav-item fw-bold">
                 <Link
                   className={`nav-link ${
                     location.pathname === "/techblogs" ? "active" : ""
@@ -70,7 +71,7 @@ export default function Navbar() {
                 </Link>
               </li>
             </ul>
-            {localStorage.getItem("token") ? (
+            {localStorage.getItem("email") === "mahekramdasani@gmail.com" ? (
               <>
                 <Link
                   className="btn btn-primary mx-2"
@@ -111,7 +112,6 @@ export default function Navbar() {
                 Logout
               </Link>
             )}
-            
           </div>
         </div>
       </nav>

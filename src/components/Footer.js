@@ -5,6 +5,7 @@ import {
   faTwitter,
   faInstagram,
 } from "@fortawesome/free-brands-svg-icons";
+import "./Footer.css";
 import { Link } from "react-router-dom";
 
 function Footer() {
@@ -19,7 +20,7 @@ function Footer() {
           <div className="col">
             <div className="social-media">
               <h4>🌟 Stay Connected on Social Media! 🌟</h4>
-              <div className="d-flex" style={{paddingLeft:"276px"}}>
+              <div className="d-flex custom-padding">
                 <a href="https://www.facebook.com" className="social-icon" style={socialIconStyle} target="_black">
                   <FontAwesomeIcon icon={faFacebook} />
                 </a>

@@ -1,0 +1,7 @@
+.custom-padding {
+    padding-left: 276px;
+
+    @media (max-width: 767px) {
+        padding-left: 134px;
+    }
+}
