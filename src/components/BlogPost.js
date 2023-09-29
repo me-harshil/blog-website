@@ -28,7 +28,9 @@ export default function BlogPost(props) {
             alt="..."
           />
           <div className="card-body">
-            <h2 className="card-title">{title}</h2>
+            <h2 className="card-title">
+              {title.length <= 37 ? title : title.slice(0, 34) + "..."}
+            </h2>
             <p className="card-text fw-bold" style={{ hyphens: "auto" }}>
               {description.slice(0, 180)}...
             </p>
