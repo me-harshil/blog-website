@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-
+import back from '../components/auth/my-account.jpg'
+import '../components/auth/login.css'
 export default function Contact(props) {
   const [formData, setFormData] = useState({
     name: "",
@@ -47,8 +48,15 @@ export default function Contact(props) {
   };
 
   return (
-    <div className="container my-4">
-      <h2>Contact Us</h2>
+    <>
+    <section className="login">
+        <div className="container">
+          <div className="backImg">
+            <img src={back} alt="" />
+            <div className="text">
+              <h1>Contact Us</h1>
+            </div>
+          </div>
       <form method="post" onSubmit={handleSubmit}>
         <div className="mb-3">
           <label htmlFor="name" className="form-label">
@@ -109,6 +117,8 @@ export default function Contact(props) {
           Submit
         </button>
       </form>
-    </div>
+      </div>
+    </section>
+    </>
   );
 }

@@ -11,7 +11,11 @@ from django.http import HttpResponseForbidden
 class Blog(APIView):
     # Fetch all blogs
     def get(self, request):
-        blog_objs = BlogData.objects.all().order_by('-id')
+        b = request.GET.get('tag')
+        if b:
+            blog_objs = BlogData.objects.filter(tag__icontains=b)
+        else:
+            blog_objs = BlogData.objects.all().order_by('-id')
         serializer = BlogSerializer(blog_objs, many=True)
         return Response(serializer.data, status=200)
 

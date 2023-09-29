@@ -39,9 +39,13 @@ export default function BlogPost(props) {
                 By {author} on {date}
               </small>
             </p>
-            <Link to={`/posts/${id}`} className="btn btn-primary">
-              Read More
-            </Link>
+            {localStorage.getItem("token") ? (
+              <Link to={`/posts/${id}`} className="btn btn-primary">
+                Read More
+              </Link>
+            ) : (
+              <small>Signup/Login to read more</small>
+            )}
           </div>
         </div>
       </div>

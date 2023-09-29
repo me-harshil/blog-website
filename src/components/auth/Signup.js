@@ -1,13 +1,14 @@
 import { useNavigate } from "react-router-dom";
 import React, { useState } from "react";
 import auth from "../../firebase";
+import { BsGoogle } from "react-icons/bs";
 import {
   createUserWithEmailAndPassword,
   signInWithPopup,
   updateProfile,
 } from "firebase/auth";
-import back from './my-account.jpg'
-import './login.css'
+import back from "./my-account.jpg";
+import "./login.css";
 import { GoogleAuthProvider } from "firebase/auth";
 export default function Signup(props) {
   const navigate = useNavigate();
@@ -43,9 +44,10 @@ export default function Signup(props) {
       .then((result) => {
         // You can access the Google user's information in result.user
         const user = result.user;
-        console.log("Google Sign-Up successful", user);
+        // console.log("Google Sign-Up successful", user);
         if (user.accessToken) {
           localStorage.setItem("token", user.accessToken);
+          localStorage.setItem("token", user.email);
           props.showAlert("Logged in successfully", "success");
           navigate("/");
         } else {
@@ -59,19 +61,20 @@ export default function Signup(props) {
 
   return (
     <>
-      <section className='login'>
-        <div className='container'>
-          <div className='backImg'>
-            <img src={back} alt='' />
-            <div className='text'>
+      <section className="login">
+        <div className="container">
+          <div className="backImg">
+            <img src={back} alt="" />
+            <div className="text">
               <h3>Register</h3>
               <h1>My account</h1>
             </div>
           </div>
 
           <form method="post" onSubmit={handleSubmit}>
-          <span>Username *</span>
-            <input type="text"
+            <span>Username *</span>
+            <input
+              type="text"
               className="form-control"
               id="name"
               name="name"
@@ -80,9 +83,11 @@ export default function Signup(props) {
               onChange={(e) => {
                 setName(e.target.value);
               }}
-              required/>
+              required
+            />
             <span>Email address *</span>
-            <input  type="email"
+            <input
+              type="email"
               className="form-control"
               id="email"
               name="email"
@@ -91,10 +96,12 @@ export default function Signup(props) {
               onChange={(e) => {
                 setEmail(e.target.value);
               }}
-              required />
-            
+              required
+            />
+
             <span>Password *</span>
-            <input type="password"
+            <input
+              type="password"
               className="form-control"
               id="password"
               name="password"
@@ -103,11 +110,22 @@ export default function Signup(props) {
               onChange={(e) => {
                 setPassword(e.target.value);
               }}
-              required/>
-            <button className='button'>Register</button>
+              required
+            />
+            <button className="button">Register</button>
           </form>
         </div>
-      <button onClick={signUpWithGoogle}>Sign Up With Google</button>
+        <div className="text-center my-4">
+          <p>OR</p>
+          <button
+            onClick={signUpWithGoogle}
+            className="m-2 btn btn-outline-dark"
+          >
+            <BsGoogle className="icon m-1" />
+            SIGN UP WITH GOOGLE
+          </button>
+          <br />
+        </div>
       </section>
     </>
   );

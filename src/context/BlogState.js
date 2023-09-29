@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import BlogContext from "./blogContext";
 
-
 const BlogState = (props) => {
   const [blogs, setBlogs] = useState([]);
 
@@ -13,11 +12,17 @@ const BlogState = (props) => {
     const data = await response.json();
     setBlogs(data);
   };
-
-  const addBlog = async (title, description, tag, author,image) => {
+  const searchBlogs = async (tag) => {
+    const url = `http://127.0.0.1:8000/api/blogs/fetchallblogs?tag=${tag}`;
+    const response = await fetch(url, {
+      method: "GET",
+    });
+    const data = await response.json();
+    setBlogs(data);
+  };
+  const addBlog = async (title, description, tag, author, image) => {
     try {
-      // const email = localStorage.getItem("email");
-      const email = "hello@hello.com"
+      const email = localStorage.getItem("email");
       const url = "http://127.0.0.1:8000/api/blogs/addblog";
       const formData = new FormData();
       formData.append("title", title);
@@ -68,7 +73,9 @@ const BlogState = (props) => {
   };
 
   return (
-    <BlogContext.Provider value={{ blogs, getBlogs, addBlog ,loadBlog}}>
+    <BlogContext.Provider
+      value={{ blogs, getBlogs, addBlog, loadBlog, searchBlogs }}
+    >
       {props.children}
     </BlogContext.Provider>
   );

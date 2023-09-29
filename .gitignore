@@ -24,3 +24,5 @@ yarn-error.log*
 
 Backend/blog/blog/.vscode/
 .env.local
+
+*.pptx

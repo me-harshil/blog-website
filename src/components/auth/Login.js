@@ -2,9 +2,10 @@ import React, { useState } from "react";
 import auth from "../../firebase";
 import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import { GoogleAuthProvider } from "firebase/auth";
+import {BsGoogle} from 'react-icons/bs'
 import { useNavigate } from "react-router-dom";
-import back from './my-account.jpg'
-import './login.css'
+import back from "./my-account.jpg";
+import "./login.css";
 export default function Login(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -33,7 +34,7 @@ export default function Login(props) {
       .then((result) => {
         // You can access the Google user's information in result.user
         const user = result.user;
-        console.log("Google Sign-In successful",user.email);
+        console.log("Google Sign-In successful", user.email);
         // console.log(user.accessToken);
         if (user.accessToken) {
           localStorage.setItem("token", user.accessToken);
@@ -90,7 +91,17 @@ export default function Login(props) {
             <button className="button">Log in</button>
           </form>
         </div>
-        <button onClick={signInWithGoogle}>SIGN IN WITH GOOGLE</button>
+        <div className="text-center my-4">
+          <p>OR</p>
+          <button
+            onClick={signInWithGoogle}
+            className="m-2 btn btn-outline-dark"
+          >
+            <BsGoogle className="icon m-1" />
+            SIGN IN WITH GOOGLE
+          </button>
+          <br />
+        </div>
       </section>
     </>
   );
