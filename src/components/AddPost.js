@@ -41,7 +41,6 @@ export default function AddPost(props) {
   });
 
   const onChange = (e) => {
-    
     setPost({
       ...post,
       [e.target.name]: e.target.value,
@@ -49,14 +48,12 @@ export default function AddPost(props) {
     });
   };
 
-
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     setSelectedImage(file);
-  }
+  };
 
   const resetPost = (e) => {
-    // e.preventDefault();
     setPost({
       title: "",
       description: "",
@@ -70,8 +67,8 @@ export default function AddPost(props) {
 
   const handleClick = async (e) => {
     e.preventDefault();
-    if(selectedImage === null){
-      setSelectedImage("images/default.jpg")
+    if (selectedImage === null) {
+      setSelectedImage("images/default.jpg");
     }
     const result = await addBlog(
       post.title,
@@ -112,24 +109,22 @@ export default function AddPost(props) {
           />
         </div>
         <div className="mb-3">
-        <label htmlFor="image" className="form-label me-2">
-            Upload Image 
+          <label htmlFor="image" className="form-label me-2">
+            Upload Image
           </label>
-        <input type="file" accept="image/*" onChange={handleImageChange} id="image" name="image" required/>
+          <input
+            type="file"
+            accept="image/*"
+            onChange={handleImageChange}
+            id="image"
+            name="image"
+            required
+          />
         </div>
         <div className="mb-3">
           <label htmlFor="postContent" className="form-label">
             Post Content
           </label>
-          {/* <textarea
-            className="form-control border border-dark"
-            id="postContent"
-            rows="15"
-            placeholder="Enter Post Content Here"
-            name="content"
-            onChange={onChange}
-            value={post.content}
-          ></textarea> */}
 
           <ReactQuill
             modules={module}
@@ -138,7 +133,6 @@ export default function AddPost(props) {
             onChange={setValue}
             className="border border-dark"
           />
-          {/* {console.log(ReactQuill.getText())} */}
         </div>
         <div className="mb-3">
           <label htmlFor="postCategory" className="form-label">

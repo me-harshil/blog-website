@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
-import { useParams,useNavigate } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import blogContext from "../context/blogContext";
-import {BsArrowBarLeft} from 'react-icons/bs'
+import { BsArrowBarLeft } from "react-icons/bs";
 import * as DOMPurify from "dompurify";
 
 export default function PostPage() {
@@ -10,7 +10,7 @@ export default function PostPage() {
   const { id } = useParams();
   const [post, setPost] = useState(null);
   const [imageUrl, setimageUrl] = useState(null);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   useEffect(() => {
     loadBlog(id)
       .then((data) => {
@@ -32,11 +32,17 @@ export default function PostPage() {
 
   return (
     <div className="container">
-      <button onClick={()=>{
-        navigate(-1)
-      }} className="btn btn-primary m-2">
+      <button
+        onClick={() => {
+          navigate(-1);
+        }}
+        className="btn btn-primary m-2"
+      >
         <h5>
-        <BsArrowBarLeft className="icon"/>Back</h5></button>
+          <BsArrowBarLeft className="icon" />
+          Back
+        </h5>
+      </button>
       {post && (
         <div className="card">
           <div className="card-body">

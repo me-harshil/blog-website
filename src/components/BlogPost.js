@@ -7,7 +7,6 @@ export default function BlogPost(props) {
   const imageUrl = "http://127.0.0.1:8000/" + image;
   const options = {
     wordwrap: false,
-    // ...
   };
   description = convert(description, options);
 

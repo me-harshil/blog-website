@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import back from '../components/auth/my-account.jpg'
-import '../components/auth/login.css'
+import back from "../components/auth/my-account.jpg";
+import "../components/auth/login.css";
 export default function Contact(props) {
   const [formData, setFormData] = useState({
     name: "",
@@ -49,7 +49,7 @@ export default function Contact(props) {
 
   return (
     <>
-    <section className="login">
+      <section className="login">
         <div className="container">
           <div className="backImg">
             <img src={back} alt="" />
@@ -57,68 +57,68 @@ export default function Contact(props) {
               <h1>Contact Us</h1>
             </div>
           </div>
-      <form method="post" onSubmit={handleSubmit}>
-        <div className="mb-3">
-          <label htmlFor="name" className="form-label">
-            Name
-          </label>
-          <input
-            type="text"
-            className="form-control"
-            id="name"
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
-            required
-          />
+          <form method="post" onSubmit={handleSubmit}>
+            <div className="mb-3">
+              <label htmlFor="name" className="form-label">
+                Name
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                id="name"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div className="mb-3">
+              <label htmlFor="email" className="form-label">
+                Email address
+              </label>
+              <input
+                type="email"
+                className="form-control"
+                id="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div className="mb-3">
+              <label htmlFor="topic" className="form-label">
+                Subject
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                id="topic"
+                name="topic"
+                value={formData.topic}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div className="mb-3">
+              <label htmlFor="message" className="form-label">
+                Message
+              </label>
+              <textarea
+                className="form-control border border-dark"
+                id="message"
+                name="message"
+                value={formData.message}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <button type="submit" className="btn btn-primary">
+              Submit
+            </button>
+          </form>
         </div>
-        <div className="mb-3">
-          <label htmlFor="email" className="form-label">
-            Email address
-          </label>
-          <input
-            type="email"
-            className="form-control"
-            id="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div className="mb-3">
-          <label htmlFor="topic" className="form-label">
-            Subject
-          </label>
-          <input
-            type="text"
-            className="form-control"
-            id="topic"
-            name="topic"
-            value={formData.topic}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div className="mb-3">
-          <label htmlFor="message" className="form-label">
-            Message
-          </label>
-          <textarea
-            className="form-control border border-dark"
-            id="message"
-            name="message"
-            value={formData.message}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <button type="submit" className="btn btn-primary">
-          Submit
-        </button>
-      </form>
-      </div>
-    </section>
+      </section>
     </>
   );
 }

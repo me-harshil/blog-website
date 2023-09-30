@@ -37,16 +37,7 @@ const BlogState = (props) => {
         },
         body: formData,
       });
-      // const response = await fetch(url, {
-      //   method: "POST",
-      //   headers: {
-      //     "Content-Type": "application/json",
-      //   },
-      //   body: JSON.stringify({ title, description, tag, author }),
-      // });
       const data = await response.json();
-      // console.log(data);
-      // console.log(data.non_field_errors);
       if (!data.non_field_errors) {
         props.showAlert("Post Added Successfully", "success");
         return true;
@@ -56,7 +47,6 @@ const BlogState = (props) => {
       }
     } catch (error) {
       props.showAlert("Post Not Added", "danger");
-      console.log(error);
       return false;
     }
   };
@@ -68,7 +58,6 @@ const BlogState = (props) => {
       method: "GET",
     });
     const data = await response.json();
-    // console.log(response.text())
     return data;
   };
 

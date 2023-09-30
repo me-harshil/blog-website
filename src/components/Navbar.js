@@ -4,7 +4,6 @@ import { BiLogOut, BiLogIn } from "react-icons/bi";
 import { SiGnuprivacyguard } from "react-icons/si";
 import { IoHomeOutline } from "react-icons/io5";
 import { GrTechnology } from "react-icons/gr";
-// import { HiOutlineLightBulb } from "react-icons/hi";
 import { MdContactMail } from "react-icons/md";
 import "./Navbar.css";
 import logo from "./logo.png";

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import auth from "../../firebase";
 import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import { GoogleAuthProvider } from "firebase/auth";
-import {BsGoogle} from 'react-icons/bs'
+import { BsGoogle } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 import back from "./my-account.jpg";
 import "./login.css";
@@ -34,8 +34,7 @@ export default function Login(props) {
       .then((result) => {
         // You can access the Google user's information in result.user
         const user = result.user;
-        console.log("Google Sign-In successful", user.email);
-        // console.log(user.accessToken);
+
         if (user.accessToken) {
           localStorage.setItem("token", user.accessToken);
           localStorage.setItem("email", user.email);

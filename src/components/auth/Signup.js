@@ -19,13 +19,12 @@ export default function Signup(props) {
     e.preventDefault();
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        console.log(userCredential);
         if (userCredential.user.accessToken) {
           localStorage.setItem("token", userCredential.user.accessToken);
           updateProfile(userCredential.user, {
             displayName: name,
           });
-          console.log(userCredential.user.displayName);
+
           localStorage.setItem("name", name);
           props.showAlert("Account created successfully", "success");
           navigate("/");
@@ -44,7 +43,6 @@ export default function Signup(props) {
       .then((result) => {
         // You can access the Google user's information in result.user
         const user = result.user;
-        // console.log("Google Sign-Up successful", user);
         if (user.accessToken) {
           localStorage.setItem("token", user.accessToken);
           localStorage.setItem("token", user.email);
