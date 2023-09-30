@@ -44,7 +44,6 @@ CORS_ALLOW_HEADERS = (
 
 INSTALLED_APPS = [
     'blog_api.apps.BlogApiConfig',
-    'user_api.apps.UserApiConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -86,12 +85,7 @@ WSGI_APPLICATION = 'blog.wsgi.application'
 
 
 
-# Rest framework
-REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework_simplejwt.authentication.JWTAuthentication',
-    )
-}
+
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases

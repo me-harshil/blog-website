@@ -1,8 +1,5 @@
 from django.db import models
 from datetime import date
-from django.utils import timezone
-
-# today = date.today()
 
 # Create your models here.
 class BlogData(models.Model):

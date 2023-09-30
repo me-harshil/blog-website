@@ -25,14 +25,11 @@ class Blog(APIView):
         if email == 'hello@hello.com':
             if 'image' in request.FILES:
                 # Handle form data with image upload
-                serializer = BlogCreateSerializer(data=request.data, context={'request': request})
+                serializer = BlogCreateSerializer(
+                    data=request.data, context={'request': request})
             else:
-                # Handle JSON data
                 serializer = BlogCreateSerializer(data=request.data)
-            # serializer = BlogCreateSerializer(data=request.data)
-            # form = BlogForm(request.POST, request.FILES)
-            # if form.is_valid():
-            #     form.save()
+
             if serializer.is_valid():
                 serializer.save()
                 return Response({"data": serializer.data, "message": "blog create successfully"}, status=201)
