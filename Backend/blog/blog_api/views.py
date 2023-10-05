@@ -12,7 +12,10 @@ class Blog(APIView):
     # Fetch all blogs
     def get(self, request):
         b = request.GET.get('tag')
-        if b:
+        t = request.GET.get('title')
+        if t:
+            blog_objs = BlogData.objects.filter(title__icontains=t)
+        elif b:
             blog_objs = BlogData.objects.filter(tag__icontains=b)
         else:
             blog_objs = BlogData.objects.all().order_by('-id')

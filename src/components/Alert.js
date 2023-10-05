@@ -5,6 +5,9 @@ export default function Alert(props) {
     if (word === "danger") {
       word = "error";
     }
+    if (word === "primary") {
+      word = "";
+    }
     return word.charAt(0).toUpperCase() + word.slice(1);
   };
   return (

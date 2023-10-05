@@ -14,6 +14,7 @@ import Footer from "./components/Footer";
 import EmailRouteGuard from "./components/EmailRouteGuard";
 import UnauthorizedPage from "./components/UnauthorizedPage";
 import NotFoundPage from "./components/NotFoundPage";
+import VerifyEmail from "./components/auth/VerifyEmail";
 
 function App() {
   const userEmail = localStorage.getItem("email");
@@ -44,6 +45,7 @@ function App() {
             <Route path="/" element={<Blogs showAlert={showAlert} />} />
             <Route path="/login" element={<Login showAlert={showAlert} />} />
             <Route path="/signup" element={<Signup showAlert={showAlert} />} />
+            <Route path="/verify-email" element={<VerifyEmail showAlert={showAlert}/>} />
             <Route
               path="/addpost"
               element={
@@ -73,6 +75,7 @@ function App() {
                 />
               }
             />
+
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
           <Footer />

@@ -1,8 +1,4 @@
-import React, { useState } from "react";
-import auth from "../../firebase";
-import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
-import { GoogleAuthProvider } from "firebase/auth";
-import { BsGoogle } from "react-icons/bs";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import back from "./my-account.jpg";
 import "./login.css";
@@ -10,43 +6,36 @@ export default function Login(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
-  const handleSubmit = (e) => {
+  useEffect(() => {
+    localStorage.clear();
+  }, []);
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        if (userCredential.user.accessToken) {
-          localStorage.setItem("token", userCredential.user.accessToken);
-          localStorage.setItem("name", userCredential.user.displayName);
-          props.showAlert("Logged in successfully", "success");
-          navigate("/");
-        } else {
-          props.showAlert("Invalid Credentials", "danger");
-        }
-      })
-      .catch((err) => {
-        props.showAlert("User not signed up", "danger");
-      });
-  };
-  const googleProvider = new GoogleAuthProvider();
-  // Trigger Google Sign-In
-  const signInWithGoogle = () => {
-    signInWithPopup(auth, googleProvider)
-      .then((result) => {
-        // You can access the Google user's information in result.user
-        const user = result.user;
-
-        if (user.accessToken) {
-          localStorage.setItem("token", user.accessToken);
-          localStorage.setItem("email", user.email);
-          props.showAlert("Logged in successfully", "success");
-          navigate("/");
-        } else {
-          props.showAlert("Invalid Credentials", "danger");
-        }
-      })
-      .catch((error) => {
-        console.error("Google Sign-In failed", error);
-      });
+    const url = "http://127.0.0.1:8000/api/user/login/";
+    const data = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: e.target.email.value,
+        password: e.target.password.value,
+      }),
+    });
+    const response = await data.json();
+    if (response.token) {
+      localStorage.setItem("token", response.token);
+      localStorage.setItem("email", response.email);
+      props.showAlert("Logged in successfully", "success");
+      navigate("/");
+    } else if (response.otpError) {
+      localStorage.clear();
+      props.showAlert("OTP not verified", "danger");
+      navigate("/signup");
+    } else {
+      localStorage.clear();
+      props.showAlert("Invalid credentials", "danger");
+    }
   };
   return (
     <>
@@ -89,17 +78,6 @@ export default function Login(props) {
             />
             <button className="button">Log in</button>
           </form>
-        </div>
-        <div className="text-center my-4">
-          <p>OR</p>
-          <button
-            onClick={signInWithGoogle}
-            className="m-2 btn btn-outline-dark"
-          >
-            <BsGoogle className="icon m-1" />
-            SIGN IN WITH GOOGLE
-          </button>
-          <br />
         </div>
       </section>
     </>

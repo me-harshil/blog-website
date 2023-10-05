@@ -40,9 +40,17 @@ CORS_ALLOW_HEADERS = (
     'Content-Type',
 )
 
+AUTH_USER_MODEL = 'user_data.CustomUser'
+
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+)
+
 # Application definition
 
 INSTALLED_APPS = [
+    'rest_framework.authtoken',
+    'user_data',
     'blog_api.apps.BlogApiConfig',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -82,9 +90,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'blog.wsgi.application'
-
-
-
 
 
 # Database
@@ -139,5 +144,14 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-MEDIA_URL = '/media/' 
+MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
+
+
+# Email settings
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'harshilproject12@gmail.com'
+EMAIL_HOST_PASSWORD = 'ksntethabwpgsbea'

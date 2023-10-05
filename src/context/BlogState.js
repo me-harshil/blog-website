@@ -12,13 +12,23 @@ const BlogState = (props) => {
     const data = await response.json();
     setBlogs(data);
   };
-  const searchBlogs = async (tag) => {
-    const url = `http://127.0.0.1:8000/api/blogs/fetchallblogs?tag=${tag}`;
+  const searchBlogs = async (tag, dropdown) => {
+    console.log(dropdown);
+    if (dropdown === "Title" || dropdown === "") {
+      var url = `http://127.0.0.1:8000/api/blogs/fetchallblogs?title=${tag}`;
+    } else {
+      url = `http://127.0.0.1:8000/api/blogs/fetchallblogs?tag=${tag}`;
+    }
     const response = await fetch(url, {
       method: "GET",
     });
     const data = await response.json();
-    setBlogs(data);
+    if (data.length > 0) {
+      setBlogs(data);
+    } else {
+      props.showAlert("No Data Available", "primary");
+      setBlogs([]);
+    }
   };
   const addBlog = async (title, description, tag, author, image) => {
     try {

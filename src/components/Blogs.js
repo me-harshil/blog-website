@@ -6,6 +6,7 @@ export default function Blogs(props) {
   const { blogs, getBlogs } = useContext(BlogContext);
   const { blogss, searchBlogs } = useContext(BlogContext);
   const [tag, setTag] = useState("");
+  const [dropdown, setDropdown] = useState("");
   useEffect(() => {
     getBlogs();
     // eslint-disable-next-line
@@ -16,8 +17,20 @@ export default function Blogs(props) {
       <h1 className="text-center" style={{ margin: "75px 0px 20px" }}>
         Blogs
       </h1>
-      <div>
-        Search
+      <div className="search">
+        <select
+          name="dropdown"
+          className="btn btn-sm btn-primary"
+          onChange={(e) => {
+            setDropdown(e.target.value);
+          }}
+        >
+          <option value="" selected hidden disabled>
+            Search By:
+          </option>
+          <option value="Title">Title</option>
+          <option value="Tag">Tag</option>
+        </select>
         <input
           type="text"
           name="searchTag"
@@ -26,13 +39,16 @@ export default function Blogs(props) {
             setTag(e.target.value);
           }}
         />
-        <button
-          onClick={() => {
-            searchBlogs(tag);
-          }}
-        >
-          Search
-        </button>
+        {dropdown ? (
+          <button
+            onClick={() => {
+              searchBlogs(tag, dropdown);
+            }}
+            className="btn btn-primary float-left"
+          >
+            Search
+          </button>
+        ) : null}
       </div>
       {blogss ? (
         <div className="container">

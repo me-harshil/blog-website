@@ -1,60 +1,40 @@
 import { useNavigate } from "react-router-dom";
-import React, { useState } from "react";
-import auth from "../../firebase";
-import { BsGoogle } from "react-icons/bs";
-import {
-  createUserWithEmailAndPassword,
-  signInWithPopup,
-  updateProfile,
-} from "firebase/auth";
+import React, { useState, useEffect } from "react";
 import back from "./my-account.jpg";
 import "./login.css";
-import { GoogleAuthProvider } from "firebase/auth";
 export default function Signup(props) {
   const navigate = useNavigate();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const handleSubmit = (e) => {
+
+  useEffect(() => {
+    localStorage.clear();
+  }, []);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        if (userCredential.user.accessToken) {
-          localStorage.setItem("token", userCredential.user.accessToken);
-          updateProfile(userCredential.user, {
-            displayName: name,
-          });
-
-          localStorage.setItem("name", name);
-          props.showAlert("Account created successfully", "success");
-          navigate("/");
-        } else {
-          props.showAlert("User already exists", "danger");
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-  const googleProvider = new GoogleAuthProvider();
-
-  const signUpWithGoogle = () => {
-    signInWithPopup(auth, googleProvider)
-      .then((result) => {
-        // You can access the Google user's information in result.user
-        const user = result.user;
-        if (user.accessToken) {
-          localStorage.setItem("token", user.accessToken);
-          localStorage.setItem("token", user.email);
-          props.showAlert("Logged in successfully", "success");
-          navigate("/");
-        } else {
-          props.showAlert("Invalid Credentials", "danger");
-        }
-      })
-      .catch((error) => {
-        console.error("Google Sign-Up failed", error);
-      });
+    const url = "http://127.0.0.1:8000/api/user/register/";
+    const data = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name: e.target.name.value,
+        email: e.target.email.value,
+        password: e.target.password.value,
+      }),
+    });
+    const response = await data.json();
+    if (response.token) {
+      localStorage.setItem("token", response.token);
+      localStorage.setItem("email", response.email);
+      props.showAlert("OTP send to your email.", "success");
+      navigate("/verify-email");
+    } else {
+      props.showAlert("User already exists", "danger");
+    }
   };
 
   return (
@@ -112,17 +92,6 @@ export default function Signup(props) {
             />
             <button className="button">Register</button>
           </form>
-        </div>
-        <div className="text-center my-4">
-          <p>OR</p>
-          <button
-            onClick={signUpWithGoogle}
-            className="m-2 btn btn-outline-dark"
-          >
-            <BsGoogle className="icon m-1" />
-            SIGN UP WITH GOOGLE
-          </button>
-          <br />
         </div>
       </section>
     </>
